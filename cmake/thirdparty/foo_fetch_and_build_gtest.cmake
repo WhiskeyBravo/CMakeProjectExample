@@ -17,7 +17,7 @@ set(GTEST_INCLUDE_DIR "${source_dir}/include")
 
 ExternalProject_Get_Property(external_gtest binary_dir)
 set(GTEST_LIBRARY_DIR "${binary_dir}")
-
+message(STATUS "GTEST_LIBRARY_DIR: " ${GTEST_LIBRARY_DIR})
 add_library(gtest INTERFACE)
 target_include_directories(gtest INTERFACE ${GTEST_INCLUDE_DIR})
 
@@ -28,11 +28,11 @@ set(GTEST_LIBRARY "${GTEST_LIBRARY_DIR}/${CMAKE_STATIC_LIBRARY_PREFIX}gtest${CMA
   target_link_libraries(gtest INTERFACE ${GTEST_LIBRARIES})
 else()
 target_link_libraries(gtest INTERFACE
-        debug ${GTEST_LIBS_DIR}/DebugLibs/${CMAKE_FIND_LIBRARY_PREFIXES}gtest${CMAKE_FIND_LIBRARY_SUFFIXES}
-        optimized ${GTEST_LIBS_DIR}/ReleaseLibs/${CMAKE_FIND_LIBRARY_PREFIXES}gtest${CMAKE_FIND_LIBRARY_SUFFIXES}
+        debug ${GTEST_LIBRARY_DIR}/Debug/${CMAKE_FIND_LIBRARY_PREFIXES}gtest${CMAKE_FIND_LIBRARY_SUFFIXES}
+        optimized ${GTEST_LIBRARY_DIR}/Release/${CMAKE_FIND_LIBRARY_PREFIXES}gtest${CMAKE_FIND_LIBRARY_SUFFIXES}
   )
 	target_link_libraries(gtest INTERFACE
-        debug ${GTEST_LIBS_DIR}/DebugLibs/${CMAKE_FIND_LIBRARY_PREFIXES}gtest_main${CMAKE_FIND_LIBRARY_SUFFIXES}
-        optimized ${GTEST_LIBS_DIR}/ReleaseLibs/${CMAKE_FIND_LIBRARY_PREFIXES}gtest_main${CMAKE_FIND_LIBRARY_SUFFIXES}
+        debug ${GTEST_LIBRARY_DIR}/Debug/${CMAKE_FIND_LIBRARY_PREFIXES}gtest_main${CMAKE_FIND_LIBRARY_SUFFIXES}
+        optimized ${GTEST_LIBRARY_DIR}/Release/${CMAKE_FIND_LIBRARY_PREFIXES}gtest_main${CMAKE_FIND_LIBRARY_SUFFIXES}
   )
 endif()

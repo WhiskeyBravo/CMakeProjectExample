@@ -7,7 +7,7 @@ function(foo_add_executable _NAME)
 
   set(options)
   set(oneValueArgs)
-  set(multiValueArgs H_FILES CPP_FILES INTERNAL_DEPENDENCIES EXTERNAL_DEPENDENCIES)
+  set(multiValueArgs H_FILES CPP_FILES INTERNAL_DEPENDENCIES EXTERNAL_DEPENDENCIES EXTERNAL_BUILD_DEPENDENCIES)
   cmake_parse_arguments(FOO_ADD_EXECUTABLE "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
   if(NOT FOO_ADD_EXECUTABLE_CPP_FILES)
@@ -18,5 +18,8 @@ function(foo_add_executable _NAME)
 
   target_include_directories(${_NAME} PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}")
   target_link_libraries(${_NAME} ${FOO_ADD_EXECUTABLE_INTERNAL_DEPENDENCIES} ${FOO_ADD_EXECUTABLE_EXTERNAL_DEPENDENCIES})
+  if(FOO_ADD_EXECUTABLE_EXTERNAL_BUILD_DEPENDENCIES)
+    add_dependencies(${_NAME} ${FOO_ADD_EXECUTABLE_EXTERNAL_BUILD_DEPENDENCIES})
+  endif()
 
 endfunction()

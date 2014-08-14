@@ -6,6 +6,7 @@
 #include <foo/core/logger.h>
 
 #include <boost/filesystem/operations.hpp>
+#include <iostream> 
 
 bool foo::log (std::string message)
 {
