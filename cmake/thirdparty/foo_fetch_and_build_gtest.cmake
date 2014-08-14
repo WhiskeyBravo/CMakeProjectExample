@@ -17,7 +17,7 @@ set(GTEST_INCLUDE_DIR "${source_dir}/include")
 
 ExternalProject_Get_Property(external_gtest binary_dir)
 set(GTEST_LIBRARY_DIR "${binary_dir}")
-message(STATUS "GTEST_LIBRARY_DIR: " ${GTEST_LIBRARY_DIR})
+
 add_library(gtest INTERFACE)
 target_include_directories(gtest INTERFACE ${GTEST_INCLUDE_DIR})
 
